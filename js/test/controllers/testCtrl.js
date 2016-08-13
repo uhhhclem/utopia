@@ -1,3 +1,9 @@
+/* global expect */
+/* global goog */
+/* global inject */
+
+goog.require('utopia.controllers.testCtrl');
+
 describe('testCtrl', function(){
 
     beforeEach(module('utopia'));

@@ -22,6 +22,9 @@ module.exports = function(config) {
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-material/angular-material.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      //TODO:  Figure out how to use the karma-closure-preprocessor so that
+      // these JS files don't have to be listed in the order they must be
+      // loaded.
       'js/constants.js',
       'js/objects/*.js',
       'js/controllers/*.js',
@@ -33,12 +36,6 @@ module.exports = function(config) {
     // list of files to exclude
     exclude: [
     ],
-
-
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-    },
 
 
     // test results reporter to use

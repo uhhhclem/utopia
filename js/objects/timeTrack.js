@@ -1,6 +1,6 @@
 goog.provide('utopia.objects.timeTrack');
 
-utopia.objects.timeTrack = function() {
+utopia.objects.timeTrack.TimeTrack = function() {
   this.boxes = [
       [false, false],
       [true, false],

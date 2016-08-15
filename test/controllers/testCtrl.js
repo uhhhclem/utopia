@@ -14,12 +14,22 @@ describe('testCtrl', function(){
         $controller = _$controller_;
     }));
     
-    it('should pass', function() {
-        expect(true).toBe(true);
+    it('should use injected rolls', function(){
+        var ctrl = $controller('testCtrl', {});
+        ctrl.rolls1 = [1, 2, 3];
+        ctrl.rolls2 = [4, 5, 6];
+        ctrl.roll();
+        expect(ctrl.dice.die1).toBe(1);
+        expect(ctrl.dice.die2).toBe(4);
+        ctrl.roll();
+        expect(ctrl.dice.die1).toBe(2);
+        expect(ctrl.dice.die2).toBe(5);
     });
     
-    it('should initialize with data', function(){
-        var ctrl = $controller('testCtrl', {});
-        expect(ctrl.data.field1).toBe('value1');
-    });
+    it('should roll without injected rolls', function(){
+        var ctrl = $controller('testCtrl');
+        ctrl.roll();
+        expect(1 <= ctrl.dice.die1 <=6).toBeTruthy();
+        expect(1 <= ctrl.dice.die2 <=6).toBeTruthy();
+    })
 }); 

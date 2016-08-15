@@ -1,6 +1,6 @@
 goog.provide('utopia.objects.die');
 
-utopia.objects.die = function(rolls) {
+utopia.objects.die.Die = function(rolls) {
     this.rolls = rolls;
     this.rollsIndex = -1;
     

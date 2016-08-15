@@ -7,7 +7,7 @@ goog.require('utopia.objects.timeTrack');
 describe('timeTrack', function(){
 
    it('should respond properly when a box is checked', function() {
-       var obj = new utopia.objects.timeTrack();
+       var obj = new utopia.objects.timeTrack.TimeTrack();
        obj.check();
        expect(obj.event()).toBe(false);
        obj.check();

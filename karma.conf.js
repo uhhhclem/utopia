@@ -17,9 +17,12 @@ module.exports = function(config) {
     files: [
       'bower_components/google-closure-library/closure/goog/base.js',
       'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular-mocks.js',      
-      'js/*.js',
-      'js/**/*.js'
+      'bower_components/angular-mocks/angular-mocks.js',
+      'js/constants.js',
+      'js/objects/*.js',
+      'js/controllers/*.js',
+      'js/app.js',
+      'test/**/*.js'
     ],
 
 

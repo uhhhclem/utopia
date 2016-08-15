@@ -1,6 +1,11 @@
 /* global angular */
 /* global goog */
+/* global utopia */
 
 goog.provide('utopia.module');
 
-angular.module('utopia', []); 
+goog.require('utopia.controllers.testCtrl');
+
+utopia.module.app = angular.module('utopia', []);
+
+utopia.module.app.controller('testCtrl', utopia.controllers.testCtrl);

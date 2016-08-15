@@ -8,4 +8,4 @@ goog.require('utopia.controllers.testCtrl');
 
 utopia.module.app = angular.module('utopia', []);
 
-utopia.module.app.controller('testCtrl', utopia.controllers.testCtrl);
+utopia.module.app.controller('testCtrl', utopia.controllers.testCtrl.ctrl);

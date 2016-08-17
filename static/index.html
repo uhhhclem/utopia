@@ -9,10 +9,10 @@
 <body ng-app="utopia" ng-cloak>
   <div ng-controller="gameCtrl as g">
     <div ng-controller="dieCtrl as d" class="die">
-      <div>{{d.value}}</div>
+      <div>{{d.die.value}}</div>
     </div>
     <div ng-controller="dieCtrl as d" class="die">
-      <div>{{d.value}}</div>
+      <div>{{d.die.value}}</div>
     </div>
     <md-button ng-click="g.roll()">Roll</md-button>
   </div>

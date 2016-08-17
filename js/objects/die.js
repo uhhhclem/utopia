@@ -11,11 +11,11 @@ utopia.objects.die.Die = function(rolls) {
     this.assignedTo = null;
     
     this.roll = function() {
-      if (goog.isDef(this.rolls)) {
-          this.rollsIndex++;
-          this.value = this.rolls[this.rollsIndex];
-          return;
+      if (!goog.isDef(this.rolls)) {
+        this.value = Math.floor(Math.random() * (6)) + 1;
+        return;      
       }
-      this.value = Math.floor(Math.random() * (6)) + 1;
+      this.rollsIndex++;
+      this.value = this.rolls[this.rollsIndex];
     }
 }

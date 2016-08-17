@@ -3,16 +3,18 @@
 /* global inject */
 /* global spyOn */
 
-goog.require('utopia.controllers.dieCtrl');
+goog.require('utopia.module');
 
 describe('dieCtrl', function(){
 
-    beforeEach(module('utopia'));
-    
     var $controller;
     var rootScope;
     var scope;
     var ctrl
+
+    beforeEach(function() {
+        module('utopia');
+    })
     
     beforeEach(inject(function(_$controller_, $rootScope){
         $controller = _$controller_;
@@ -24,16 +26,16 @@ describe('dieCtrl', function(){
     it('should use injected rolls', function(){
         ctrl.rolls = [1, 2, 3];
         ctrl.roll();
-        expect(ctrl.value).toBe(1);
+        expect(ctrl.die.value).toBe(1);
         ctrl.roll();
-        expect(ctrl.value).toBe(2);
+        expect(ctrl.die.value).toBe(2);
         ctrl.roll();
-        expect(ctrl.value).toBe(3);
+        expect(ctrl.die.value).toBe(3);
     });
     
     it('should roll without injected rolls', function(){
         ctrl.roll();
-        expect(1 <= ctrl.value <=6).toBeTruthy();
+        expect(1 <= ctrl.die.value <=6).toBeTruthy();
     });
     
     it('should roll when a roll event is received', function() {

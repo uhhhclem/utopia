@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'closure'],
 
 
     // list of files / patterns to load in the browser
@@ -22,16 +22,27 @@ module.exports = function(config) {
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-material/angular-material.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      //TODO:  Figure out how to use the karma-closure-preprocessor so that
-      // these JS files don't have to be listed in the order they must be
-      // loaded.
-      'js/constants.js',
-      'js/objects/*.js',
-      'js/controllers/*.js',
-      'js/app.js',
-      'test/**/*.js'
+
+      'test/**/*.js',
+      
+      {pattern: 'js/**/*.js', included: false},
+
+      // external deps
+      {
+        pattern: 'bower_components/google-closure-library/closure/goog/deps.js', 
+        included: false, 
+        served: false
+      }
     ],
 
+    preprocessors: {
+      // tests are preprocessed for dependencies (closure) and for iits
+      'test/**/*.js': ['closure', 'closure-iit'],
+      // source files are preprocessed for dependencies
+      'js/**/*.js': ['closure'],
+      // external deps
+      'bower_components/google-closure-library/closure/goog/deps.js': ['closure-deps']
+    },
 
     // list of files to exclude
     exclude: [

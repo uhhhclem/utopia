@@ -3,16 +3,18 @@
 /* global inject */
 /* global spyOn */
 
-goog.require('utopia.controllers.gameCtrl');
+goog.require('utopia.module');
 
 describe('gameCtrl', function() {
     
     var $rootScope;
     var $controller;
     
-    beforeEach(module('utopia'));
+    beforeEach(function() {
+        module('utopia');
+    })
     
-    
+
     beforeEach(inject(function(_$controller_){
         $controller = _$controller_;
     }));

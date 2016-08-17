@@ -2,12 +2,12 @@
 /* global goog */
 /* global utopia */
 
-goog.require('utopia.objects.searchActivity');
+goog.require('utopia.objects.region');
 
-describe('searchActivity', function(){
+describe('Region', function(){
     var obj;
     beforeEach(function(){
-        obj = new utopia.objects.searchActivity.SearchActivity('hp');
+        obj = new utopia.objects.region.Region('hp');
     });
     
     it('should be instantiated', function(){
@@ -15,6 +15,6 @@ describe('searchActivity', function(){
     });
     
     it('should be initialized with region data', function() {
-        expect(obj.regionData.name).toBe('Halebeard Peak');
+        expect(obj.name).toBe('Halebeard Peak');
     });
 });

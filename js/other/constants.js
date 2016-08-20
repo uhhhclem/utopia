@@ -1,3 +1,6 @@
+/* global goog */
+/* global utopia */
+
 goog.provide('utopia.constants');
 
 utopia.constants.regions = {

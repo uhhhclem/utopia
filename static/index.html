@@ -11,6 +11,10 @@
 
     <div ng-repeat="r in g.game.regions track by $index">
       <div>{{r.number}} - {{r.name}}</div>
+      <div layout="row">
+        <div ng-repeat="sb in r.searchBoxes track by $index" ng-include="'templates/searchBox.html'">
+      </div>
+      </div>
     </div>
 
     <div ng-controller="dieCtrl as d" class="die">

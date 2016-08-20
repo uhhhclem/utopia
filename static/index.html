@@ -8,6 +8,11 @@
 </head>
 <body ng-app="utopia" ng-cloak>
   <div ng-controller="gameCtrl as g">
+
+    <div ng-repeat="r in g.game.regions track by $index">
+      <div>{{r.number}} - {{r.name}}</div>
+    </div>
+
     <div ng-controller="dieCtrl as d" class="die">
       <div>{{d.die.value}}</div>
     </div>
@@ -15,6 +20,8 @@
       <div>{{d.die.value}}</div>
     </div>
     <md-button ng-click="g.roll()">Roll</md-button>
+
+
   </div>
   <!--
     Your HTML content here

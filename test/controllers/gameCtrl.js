@@ -30,4 +30,11 @@ describe('gameCtrl', function() {
         ctrl.roll();
         expect($rootScope.$broadcast).toHaveBeenCalledWith('roll');
     })
+    
+    it('should instantiate the game object', function() {
+        var ctrl = $controller('gameCtrl', {});
+        expect(ctrl.game).toBeDefined();
+        expect(ctrl.game.regions.length).toBe(6);
+        expect(ctrl.game.regions[0].name).toBe('Halebeard Peak');
+    });
 })

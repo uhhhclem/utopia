@@ -8,6 +8,6 @@ describe('Game', function() {
     
    it('should be initialized with regions', function() {
        var obj = new utopia.objects.game.Game();
-       expect(obj.regions['hp'].name).toBe('Halebeard Peak');
+       expect(obj.regions[0].name).toBe('Halebeard Peak');
    }) 
 });

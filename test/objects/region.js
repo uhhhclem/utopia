@@ -17,4 +17,16 @@ describe('Region', function(){
     it('should be initialized with region data', function() {
         expect(obj.name).toBe('Halebeard Peak');
     });
+    
+    it('should have its search boxes initialized', function() {
+        var index = 4;
+        var row = 1;
+        var column = 1;
+        var sb = obj.searchBoxes[index];
+        var cell = sb.rows[row][column];
+        expect(cell.searchBox.region).toBe(obj)
+        expect(cell.searchBox.index).toBe(index);
+        expect(cell.row).toBe(row);
+        expect(cell.column).toBe(column);
+    })
 });

@@ -16,8 +16,11 @@ utopia.objects.game.Game = function() {
         die1: new utopia.objects.die.Die(),
         die2: new utopia.objects.die.Die(),
     };
-    this.regions = {};
+    
+    // this.regions is ordered by region number.
+    var regions = Array(6);
     angular.forEach(utopia.constants.regions, function(v, k) {
-        this.regions[k] = new utopia.objects.region.Region(k);
-    }, this);
+        regions[v.number - 1] = new utopia.objects.region.Region(k);
+    });
+    this.regions =regions;
 };

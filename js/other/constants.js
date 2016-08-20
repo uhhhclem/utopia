@@ -15,5 +15,20 @@ utopia.constants.regions = {
       number: 3,
       name: 'Root Strangled Marshes',
       days: [-1, 0, -1, 0, -1, 0]
+  },
+  'gc': {
+      number: 4,
+      name: 'Glassrock Canyon',
+      days: [-1, 0, -1, 0, -1, 0]
+  },
+  'rc': {
+    number: 5,
+    name: 'Ruined City of the Ancients',
+    days: [-1, 0, 0, -1, 0, 0]
+  },
+  'fm': {
+    number: 6,
+    name: 'The Fiery Maw',
+    days: [-1, -1, 0, -1, 0, 0]
   }
 };

@@ -9,10 +9,11 @@
 }
 
 .searchBox {
-    margin-right: 2em;
+    margin: 2em;
 }
 
 .searchBox div div {
+    background-color: lightgray;
     height: 2em;
     line-height: 2em;
     margin: 1px;

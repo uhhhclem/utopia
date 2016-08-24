@@ -12,7 +12,9 @@
     <div ng-repeat="r in g.game.regions track by $index">
       <div>{{r.number}} - {{r.name}}</div>
       <div layout="row">
-        <div ng-repeat="sb in r.searchBoxes track by $index" ng-include="'templates/searchBox.html'">
+        <ut-search-box ng-repeat="sb in r.searchBoxes track by $index" 
+                       region="{{sb.region.number - 1}}"
+                       box="{{$index}}"></ut-search-box>
       </div>
       </div>
     </div>

@@ -22,6 +22,7 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
 
       'test/**/*.js',
+      'static/templates/*.html',
       
       {pattern: 'js/**/*.js', included: false},
 
@@ -33,13 +34,20 @@ module.exports = function(config) {
       }
     ],
 
+    ngHtml2JsPreprocessor: {
+      stripPrefix: 'static/',
+      moduleName: 'templates'
+    },
+
     preprocessors: {
       // tests are preprocessed for dependencies (closure) and for iits
       'test/**/*.js': ['closure', 'closure-iit'],
       // source files are preprocessed for dependencies
       'js/**/*.js': ['closure'],
       // external deps
-      'bower_components/google-closure-library/closure/goog/deps.js': ['closure-deps']
+      'bower_components/google-closure-library/closure/goog/deps.js': ['closure-deps'],
+      // html templates loaded by ng-html2js 
+      "static/templates/*.html": ["ng-html2js"]
     },
 
     // list of files to exclude

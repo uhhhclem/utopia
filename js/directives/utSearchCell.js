@@ -13,17 +13,17 @@ var ctrl = ['$scope', '$attrs', 'game', function($scope, $attrs, game) {
 
 utopia.directives.utsearchcell.directive = function() {
     return {
+        bindToController: true,
+        controller: ctrl,
+        controllerAs: 'c',
         restrict: 'E',
-        template: '<div>{{c.cell.value}}</div>',
         scope: {
             box: '@box',
             column: '@column',
             row: '@row',
             region: '@region',
         },
-        controller: ctrl,
-        controllerAs: 'c',
-        bindToController: true
+        template: '<div>{{c.cell.value}}</div>'
     };
 }
 

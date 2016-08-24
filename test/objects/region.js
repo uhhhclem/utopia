@@ -28,5 +28,18 @@ describe('Region', function(){
         expect(cell.searchBox.index).toBe(index);
         expect(cell.row).toBe(row);
         expect(cell.column).toBe(column);
-    })
+    });
+    
+    it('should track which search box is in progress', function() {
+        var sb2 = obj.searchBoxes[2];
+        var sb3 = obj.searchBoxes[3];
+        expect(sb2.available()).toBe(true);
+        expect(sb3.available()).toBe(true);
+        expect(obj.inProgress()).toBeNull();
+
+        sb2.inProgress = true;
+        expect(obj.inProgress()).toBe(sb2);
+        expect(sb2.available()).toBe(true);
+        expect(sb3.available()).toBe(false);
+    });
 });

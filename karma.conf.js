@@ -21,17 +21,13 @@ module.exports = function(config) {
       'bower_components/angular-material/angular-material.js',
       'bower_components/angular-mocks/angular-mocks.js',
 
+      // external deps
+      {pattern: 'bower_components/google-closure-library/closure/goog/deps.js', included: false, served: false},
+      {pattern: 'bower_components/google-closure-library/closure/goog/**/*.js', included: false},
+      
       'test/**/*.js',
       'static/templates/*.html',
-      
-      {pattern: 'js/**/*.js', included: false},
-
-      // external deps
-      {
-        pattern: 'bower_components/google-closure-library/closure/goog/deps.js', 
-        included: false, 
-        served: false
-      }
+      {pattern: 'js/**/*.js', included: false}
     ],
 
     ngHtml2JsPreprocessor: {
@@ -40,12 +36,14 @@ module.exports = function(config) {
     },
 
     preprocessors: {
-      // tests are preprocessed for dependencies (closure) and for iits
-      'test/**/*.js': ['closure', 'closure-iit'],
-      // source files are preprocessed for dependencies
-      'js/**/*.js': ['closure'],
       // external deps
       'bower_components/google-closure-library/closure/goog/deps.js': ['closure-deps'],
+
+      // source and test files preprocessed for dependencies
+      'js/**/*.js': ['closure', 'closure-iit'],
+      'test/**/*.js': ['closure', 'closure-iit'],
+      'bower_components/google-closure-library/closure/goog/**/*.js': ['closure'],
+      
       // html templates loaded by ng-html2js 
       "static/templates/*.html": ["ng-html2js"]
     },

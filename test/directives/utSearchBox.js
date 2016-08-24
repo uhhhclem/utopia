@@ -25,6 +25,8 @@ describe('utSearchBox', function() {
   it('compiles the directive', function() {
       var elm = $compile("<ut-search-box region='4' box='1'></ut-search-box>")($rootScope);
       $rootScope.$digest();
+      // verify that atttributes on directive get passed through to template
+      expect(elm.html()).toContain('<ut-search-cell region="4" box="1"')
   });  
 
 })

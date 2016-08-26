@@ -21,6 +21,14 @@ ctrl.prototype.canSelect = function() {
     return this.die.canSelect;
 };
 
+ctrl.prototype.click = function() {
+    if (this.die.selected) {
+        this.die.deselect();
+    } else {
+        this.die.select();
+    }
+};
+
 utopia.directives.utdie.directive = function() {
     return {
         bindToController: true,

@@ -57,4 +57,22 @@ describe('utDie', function() {
       expect(d.hasClass('selected')).toBe(true);
   });
 
+  it('responds properly when clicked', function() {
+      var die = game.dice.die2;
+      die.canSelect = true;
+      die.selected = false;
+      die.assignedTo = null;
+
+      var elm = $compile("<ut-die die-id='die2'></ut-die>")($rootScope);
+      $rootScope.$digest();
+      var div = elm.find('div');
+      
+      div.triggerHandler('click');
+      expect(die.selected).toBe(true);
+      expect(div.hasClass('selected')).toBe(true);
+      div.triggerHandler('click');
+      expect(die.selected).toBe(false);
+      expect(div.hasClass('selected')).toBe(false);
+  });
+
 })

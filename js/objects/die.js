@@ -9,7 +9,8 @@ var Die = function(rolls) {
   this.rolls = rolls;
   this.rollsIndex = -1;
   this.value = null;
-  this.canSelect = false;
+  
+  this.canSelect = true;
   this.selected = false;
   this.assignedTo = null;
   
@@ -23,6 +24,20 @@ Die.prototype.roll = function() {
 };
 
 };
+
+Die.prototype.select = function() {
+  if (!this.canSelect) {
+    return;
+  }
+  this.selected = true;
+};
+
+Die.prototype.deselect = function() {
+  if (!this.selected) {
+    return;
+  }
+  this.selected = false;
+}
 
 utopia.objects.die.Die = Die;
 

@@ -5,20 +5,32 @@ goog.provide('utopia.directives.utdie');
 
 goog.scope(function() {
 
-var ctrl = ['$scope', '$attrs', 'game', function($scope, $attrs, game) {
+var ctrl = function($scope, $attrs, game) {
     this.die = game.dice[this.dieId];
-}];
+};
+
+ctrl.prototype.assigned = function() {
+    return !(goog.isNull(this.die.assignedTo));
+};
+
+ctrl.prototype.selected = function() {
+    return this.die.selected;
+};
+
+ctrl.prototype.canSelect = function() {
+    return this.die.canSelect;
+};
 
 utopia.directives.utdie.directive = function() {
     return {
         bindToController: true,
-        controller: ctrl,
+        controller: ['$scope', '$attrs', 'game', ctrl],
         controllerAs: 'c',
         restrict: 'E',
         scope: {
             dieId: '@dieId',
         },
-        template: '<div class="die">{{c.die.value}}</div>'
+        templateUrl: 'templates/utDie.html'
     };
 }
 

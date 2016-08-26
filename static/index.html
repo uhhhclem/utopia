@@ -7,8 +7,13 @@
   <link rel="stylesheet" href="css/utopia.css">
 </head>
 <body ng-app="utopia" ng-cloak>
+  
   <div ng-controller="gameCtrl as g">
 
+    <ut-die die-id='die1'></ut-die>
+    <ut-die die-id='die2'></ut-die>
+    <md-button ng-click="g.roll()">Roll</md-button>
+  
     <div ng-repeat="r in g.game.regions track by $index">
       <div>{{r.number}} - {{r.name}}</div>
       <div layout="row">
@@ -18,14 +23,6 @@
       </div>
       </div>
     </div>
-
-    <div ng-controller="dieCtrl as d" class="die">
-      <div>{{d.die.value}}</div>
-    </div>
-    <div ng-controller="dieCtrl as d" class="die">
-      <div>{{d.die.value}}</div>
-    </div>
-    <md-button ng-click="g.roll()">Roll</md-button>
 
 
   </div>

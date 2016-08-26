@@ -4,11 +4,10 @@
 
 goog.provide('utopia.controllers.gameCtrl');
 
-utopia.controllers.gameCtrl.ctrl = function($rootScope, game) {
-    this.$rootScope = $rootScope;
+utopia.controllers.gameCtrl.ctrl = ['game', function(game) {
     this.game = game;
     
-    this.roll = function() {
-        $rootScope.$broadcast('roll');
+    this.roll = function() { 
+        this.game.roll();
     };
-}
+}];

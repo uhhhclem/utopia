@@ -9,7 +9,9 @@ goog.require('utopia.objects.die');
 goog.require('utopia.objects.timeTrack');
 goog.require('utopia.objects.region');
 
-utopia.objects.game.Game = function() {
+goog.scope(function() {
+    
+var Game = function() {
 
     this.timeTrack = new utopia.objects.timeTrack.TimeTrack();
     this.dice = {
@@ -23,4 +25,15 @@ utopia.objects.game.Game = function() {
         regions[v.number - 1] = new utopia.objects.region.Region(k);
     });
     this.regions =regions;
+    
 };
+
+Game.prototype.roll = function() {
+    this.dice.die1.roll();
+    this.dice.die2.roll();
+};
+
+utopia.objects.game.Game = Game;
+
+});
+

@@ -1,9 +1,9 @@
 /* global expect */
 /* global goog */
 /* global inject */
-/* global spyOn */
 
 goog.require('utopia.module');
+goog.require('utopia.objects.game')
 
 describe('utDie', function() {
     
@@ -21,7 +21,9 @@ describe('utDie', function() {
         game = _game_;
     }));
 
-  it('compiles the directive', function() {
+  it('contains the value of the related die', function() {
+      // Note that the game object injected into the directive may have already
+      // been mutated in other unit tests.
       game.dice.die2.value = null;
       var elm = $compile("<ut-die die-id='die2'></ut-die>")($rootScope);
       $rootScope.$digest();

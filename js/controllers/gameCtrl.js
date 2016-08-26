@@ -1,4 +1,3 @@
-/* global angular */
 /* global goog */
 /* global utopia */
 

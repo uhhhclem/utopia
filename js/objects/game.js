@@ -19,7 +19,8 @@ var Game = function() {
         die2: new utopia.objects.die.Die(),
     };
     
-    // this.regions is ordered by region number.
+    // this.regions is ordered by region number.  Note that region number
+    // starts at 1.
     var regions = Array(6);
     angular.forEach(utopia.constants.regions, function(v, k) {
         regions[v.number - 1] = new utopia.objects.region.Region(k);

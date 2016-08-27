@@ -15,9 +15,10 @@ var Game = function() {
 
     this.timeTrack = new utopia.objects.timeTrack.TimeTrack();
     this.dice = {
-        die1: new utopia.objects.die.Die(),
-        die2: new utopia.objects.die.Die(),
+        die1: new utopia.objects.die.Die(this),
+        die2: new utopia.objects.die.Die(this),
     };
+    this.selectedDie = null;
     
     // this.regions is ordered by region number.  Note that region number
     // starts at 1.
@@ -33,6 +34,26 @@ Game.prototype.roll = function() {
     this.dice.die1.roll();
     this.dice.die2.roll();
 };
+
+Game.prototype.selectDie = function(die) {
+    if (goog.isNull(die) || !goog.isDef(die) || this.selectedDie == die) {
+        return;
+    }
+    if (!goog.isNull(this.selectedDie)) {
+        this.selectedDie.selected = false;
+    }
+    this.selectedDie = die;
+    this.selectedDie.selected = true;
+}
+
+Game.prototype.deselectDie = function(die) {
+    if (goog.isNull(die) || !goog.isDef(die) || die != this.selectedDie) {
+        return;
+    }
+    die.selected = false;
+    this.selectedDie = null;
+    
+}
 
 utopia.objects.game.Game = Game;
 

@@ -37,29 +37,33 @@ describe('utDie', function() {
 
   it('sets classes correctly', function() {
       var die = game.dice.die2;
-      die.canSelect = true;
+      die.value = null;
       die.selected = false;
       die.assignedTo = null;
       
       var elm = $compile("<ut-die die-id='die2'></ut-die>")($rootScope);
       $rootScope.$digest();
       var d = elm.find('div');
+      
+      expect(d.hasClass('canSelect')).toBe(false)
+      die.roll();
+      $rootScope.$digest();
+      expect(d.hasClass('canSelect')).toBe(true)
+      
       expect(d.hasClass('die')).toBe(true);
       expect(d.hasClass('assigned')).toBe(false);
-      expect(d.hasClass('canSelect')).toBe(true);
       expect(d.hasClass('selected')).toBe(false);
       
       die.selected=true;
       die.assignedTo = {};
       $rootScope.$digest();
       expect(d.hasClass('assigned')).toBe(true);
-      expect(d.hasClass('canSelect')).toBe(true);
       expect(d.hasClass('selected')).toBe(true);
   });
 
   it('responds properly when clicked', function() {
       var die = game.dice.die2;
-      die.canSelect = true;
+      die.value = 1;
       die.selected = false;
       die.assignedTo = null;
 

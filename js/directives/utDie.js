@@ -18,7 +18,7 @@ ctrl.prototype.selected = function() {
 };
 
 ctrl.prototype.canSelect = function() {
-    return this.die.canSelect;
+    return this.die.canSelect();
 };
 
 ctrl.prototype.click = function() {

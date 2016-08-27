@@ -1,11 +1,20 @@
 .die {
-    background-color: lightgray;
+    color: white;
     height: 2em;
     line-height: 2em;
     margin: 1px;
     text-align: center;
     vertical-align: middle;
     width: 2em;
+}
+
+.canSelect {
+    color: black;
+    background-color: lightgray;
+}
+
+.selected {
+    background-color: darkgray;
 }
 
 .searchBox {

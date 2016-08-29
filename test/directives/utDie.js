@@ -70,13 +70,15 @@ describe('utDie', function() {
       var elm = $compile("<ut-die die-id='die2'></ut-die>")($rootScope);
       $rootScope.$digest();
       var div = elm.find('div');
-      
-      div.triggerHandler('click');
-      expect(die.selected).toBe(true);
-      expect(div.hasClass('selected')).toBe(true);
-      div.triggerHandler('click');
-      expect(die.selected).toBe(false);
-      expect(div.hasClass('selected')).toBe(false);
+
+      for (var i = 0; i < 4; i++) {
+        div.triggerHandler('click');
+        expect(die.selected).toBe(true);
+        expect(div.hasClass('selected')).toBe(true);
+        div.triggerHandler('click');
+        expect(die.selected).toBe(false);
+        expect(div.hasClass('selected')).toBe(false);
+      }
   });
 
 })

@@ -5,48 +5,34 @@ goog.provide('utopia.objects.die');
 
 goog.scope(function() {
 
-var Die = function(game, rolls) {
+var Die = function(game, id) {
   this.game = game;
-  this.rolls = rolls;
-  this.rollsIndex = -1;
+  this.id = id;
   this.value = null;
   
   this.selected = false;
   this.assignedTo = null;
   
 Die.prototype.roll = function() {
-  if (!goog.isDef(this.rolls)) {
-    this.value = Math.floor(Math.random() * (6)) + 1;
-    return;      
-  }
-  this.rollsIndex++;
-  this.value = this.rolls[this.rollsIndex];
+  this.value = Math.floor(Math.random() * (6)) + 1;
 };
 
 };
 
 Die.prototype.canSelect = function() {
-  if (goog.isNull(this.value)) {
-    return false;
-  }
-  if (this.selected) {
-    return false;
-  }
-  return true;
-}
+  return this.game.canSelectDie(this);
+};
 
 Die.prototype.select = function() {
-  if (!this.canSelect) {
-    return;
-  }
   this.game.selectDie(this);
 };
 
 Die.prototype.deselect = function() {
-  if (!this.selected) {
-    return;
-  }
-  this.selected = false;
+  this.game.deselectDie(this);
+}
+
+Die.prototype.toString = function() {
+  return this.id;
 }
 
 utopia.objects.die.Die = Die;

@@ -10,22 +10,16 @@ var game;
 
 beforeEach(function() {
     game = new utopia.objects.game.Game();
-    die = new utopia.objects.die.Die(game);
+    die = new utopia.objects.die.Die(game, 'die1');
 })
 
 describe('Die', function() {
-    
-    it('should use mocked-out rolls', function() {
-        var obj = new utopia.objects.die.Die(game, [1, 2, 3, 4, 5, 6])
-        obj.roll();
-        expect(obj.value).toBe(1);
-        obj.roll()
-        expect(obj.value).toBe(2);
-    });
-    
-    it('should work if rolls aren\'t mocked', function(){
-        die.roll()
-        expect(1 <= die.value <= 6).toBeTruthy();
+
+    it('should roll a number from 1 to 6', function() {
+        for (var i = 0; i < 10; i++) {
+          die.roll()
+          expect(1 <= die.value <= 6).toBeTruthy();
+        }
     });
     
     it('should be selectable if it has a value', function() {
@@ -34,4 +28,15 @@ describe('Die', function() {
        die.roll();
        expect(die.canSelect()).toBe(true);
     });
+    
+    it('should select and deselect repeatedly', function() {
+      die.roll();
+      for (var i = 0; i < 5; i++) {
+        die.select();
+        expect(die.selected).toBe(true);
+        die.deselect();
+        expect(die.selected).toBe(false);
+      }
+    });
+    
 })

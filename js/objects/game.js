@@ -15,8 +15,8 @@ var Game = function() {
 
     this.timeTrack = new utopia.objects.timeTrack.TimeTrack();
     this.dice = {
-        die1: new utopia.objects.die.Die(this),
-        die2: new utopia.objects.die.Die(this),
+        die1: new utopia.objects.die.Die(this, 'die1'),
+        die2: new utopia.objects.die.Die(this, 'die2'),
     };
     this.selectedDie = null;
     
@@ -35,10 +35,17 @@ Game.prototype.roll = function() {
     this.dice.die2.roll();
 };
 
+Game.prototype.canSelectDie = function(die) {
+    return !goog.isNull(die) && 
+        goog.isDef(die) && 
+        this.selectedDie != die && 
+        !goog.isNull(die.value);
+};
+
 Game.prototype.selectDie = function(die) {
-    if (goog.isNull(die) || !goog.isDef(die) || this.selectedDie == die) {
+    if (!this.canSelectDie(die)) {
         return;
-    }
+    };
     if (!goog.isNull(this.selectedDie)) {
         this.selectedDie.selected = false;
     }

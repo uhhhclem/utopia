@@ -26,8 +26,12 @@ utopia.objects.region.Region = function(key) {
     
     this.inProgress = function() {
         return goog.array.find(this.searchBoxes, function(sb) {
-            return sb.inProgress;
+            return sb.inProgress();
         }, this)
+    }
+    
+    this.String = function() {
+        return this.name;
     }
 };
 
@@ -41,23 +45,38 @@ utopia.objects.region.Region = function(key) {
 var SearchBox = function(region, index) {
     this.region = region;
     this.index = index;
+    this.cells = [];
     
     var rows = Array(2);
     for (var row = 0; row < 2; row++) {
         rows[row] = Array(3);
         for (var column = 0; column < 3; column++) {
             rows[row][column] = new Cell(this, row, column);
+            this.cells.push(rows[row][column]);
         }
     }
     this.rows = rows;
     
-    this.inProgress = false;
-    
+    // a searchBox is available if it's the one in progress or if no searchBox
+    // is in progress.
     this.available = function() {
         var sb = this.region.inProgress();
         return goog.isNull(sb) || sb == this;
+    };
+    
+    // a searchBox is in progress if any of its cells are non-empty and if
+    // it's not completely filled.
+    this.inProgress = function() {
+        var found = goog.array.reduce(this.cells, function(r, v) {
+            var c = (goog.isNull(v.die)) ? 0 : 1;
+            return r + c;
+        }, 0);
+        return (found != 0 && found != 6);
     }
     
+    this.String = function() {
+        return this.region.String() + ' search box ' + this.index;
+    };
 }
 
 /**
@@ -71,15 +90,19 @@ var Cell = function(searchBox, row, column) {
     this.searchBox = searchBox;
     this.row = row;
     this.column = column;
-    this.value = null;
+    this.die = null;
     
     /**
      * Indicates if the cell is a valid target for assigning a die.
      * @return {boolean}
      */
     this.available = function() {
-        return this.searchBox.available() && this.value == null;
+        return this.searchBox.available() && this.die == null;
     }
+    
+    this.String = function() {
+        return this.searchBox.String() + " cell " + this.row + " " + this.column;
+    };
 }
 
 });

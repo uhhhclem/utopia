@@ -31,15 +31,24 @@ describe('Region', function(){
     });
     
     it('should track which search box is in progress', function() {
+        expect(obj.inProgress()).toBeNull();
         var sb2 = obj.searchBoxes[2];
         var sb3 = obj.searchBoxes[3];
         expect(sb2.available()).toBe(true);
         expect(sb3.available()).toBe(true);
-        expect(obj.inProgress()).toBeNull();
 
-        sb2.inProgress = true;
-        expect(obj.inProgress()).toBe(sb2);
+        sb2.rows[0][1].die = 'die';
+        expect(obj.inProgress().String()).toBe(sb2.String());
         expect(sb2.available()).toBe(true);
         expect(sb3.available()).toBe(false);
+
+        for (var i = 0; i < sb2.cells.length; i++) {
+            sb2.cells[i].die = 'die';
+        }        
+        expect(obj.inProgress()).toBeNull();
+        expect(sb2.available()).toBe(true);
+        expect(sb3.available()).toBe(true);
+        
     });
+    
 });

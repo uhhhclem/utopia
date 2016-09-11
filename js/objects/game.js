@@ -4,6 +4,7 @@
 
 goog.provide('utopia.objects.game');
 
+goog.require('goog.array');
 goog.require('utopia.constants');
 goog.require('utopia.objects.die');
 goog.require('utopia.objects.timeTrack');
@@ -27,14 +28,24 @@ var Game = function() {
         regions[v.number - 1] = new utopia.objects.region.Region(k);
     });
     this.regions =regions;
-    
 };
 
+utopia.objects.game.Game = Game;
+
+/**
+ * Roll the game's two dice.
+ */
 Game.prototype.roll = function() {
     this.dice.die1.roll();
     this.dice.die2.roll();
 };
 
+/**
+ * Indicates if a die can be selected.  A die can be selected if it has
+ * been rolled and if it is not already selected.
+ * @param {utopia.objects.Die}
+ * @return {boolean}
+ */
 Game.prototype.canSelectDie = function(die) {
     return !goog.isNull(die) && 
         goog.isDef(die) && 
@@ -42,27 +53,43 @@ Game.prototype.canSelectDie = function(die) {
         !goog.isNull(die.value);
 };
 
+/**
+ * Select a die.
+ * @param {utopia.objects.Die}
+ */
 Game.prototype.selectDie = function(die) {
     if (!this.canSelectDie(die)) {
         return;
-    };
+    }
     if (!goog.isNull(this.selectedDie)) {
         this.selectedDie.selected = false;
     }
     this.selectedDie = die;
     this.selectedDie.selected = true;
-}
+};
 
+/**
+ * Deselect a die.
+ * @param {utopia.objects.Die}
+ */
 Game.prototype.deselectDie = function(die) {
     if (goog.isNull(die) || !goog.isDef(die) || die != this.selectedDie) {
         return;
     }
     die.selected = false;
     this.selectedDie = null;
-    
-}
+};
 
-utopia.objects.game.Game = Game;
+/**
+ * Returns the region that is currently in progress, i.e. the region
+ * containing a partially-filled search box.
+ * @return {utopia.objects.Region}
+ */
+Game.prototype.inProgress = function() {
+    return goog.array.find(this.regions, function(r) {
+        return r.inProgress();
+    }, this);    
+};
 
-});
+}); // goog.scope()
 

@@ -6,13 +6,13 @@ goog.require('utopia.constants');
 
 goog.provide('utopia.objects.region');
 
-goog.scope(function(){
+goog.scope(function() {
 
 /**
- * A Region is one of the six reguins in the game.
+ * A Region is one of the six regions in the game.
  * @constructor
  */
-utopia.objects.region.Region = function(key) {
+var Region = function(key) {
     var d = utopia.constants.regions[key];
     this.number = d.number;
     this.name = d.name;
@@ -20,19 +20,26 @@ utopia.objects.region.Region = function(key) {
     
     var sb = [];
     for (var index=0; index < 6; index++) {
-        sb.push(new SearchBox(this, index))
+        sb.push(new SearchBox(this, index));
     }
     this.searchBoxes = sb;
-    
-    this.inProgress = function() {
-        return goog.array.find(this.searchBoxes, function(sb) {
-            return sb.inProgress();
-        }, this)
-    }
-    
-    this.String = function() {
-        return this.name;
-    }
+};
+
+utopia.objects.region.Region = Region;
+
+/**
+ * Indicates if the region contains a search box that is partially
+ * filled.
+ * @return {boolean}
+ */
+Region.prototype.inProgress = function() {
+    return goog.array.find(this.searchBoxes, function(sb) {
+        return sb.inProgress();
+    }, this);
+};
+
+Region.prototype.toString = function() {
+    return this.name;
 };
 
 /**
@@ -56,28 +63,34 @@ var SearchBox = function(region, index) {
         }
     }
     this.rows = rows;
+};
+
+/**
+ * Indicates if the search box is a valid target for assigning a die.
+ * A search box is available if it's in progress (partially filled) or
+ * if no other search box is in progress.
+ * @return {boolean}
+ */
+SearchBox.prototype.available = function() {
+    var sb = this.region.inProgress();
+    return goog.isNull(sb) || sb == this;  
+};
+
+/**
+ * Indicates if the search box is partially filled.
+ * @return {boolean}
+ */
+SearchBox.prototype.inProgress = function() {
+    var found = goog.array.reduce(this.cells, function(r, v) {
+        var c = (goog.isNull(v.die)) ? 0 : 1;
+        return r + c;
+    }, 0);
+    return (found != 0 && found != 6);
+};
     
-    // a searchBox is available if it's the one in progress or if no searchBox
-    // is in progress.
-    this.available = function() {
-        var sb = this.region.inProgress();
-        return goog.isNull(sb) || sb == this;
-    };
-    
-    // a searchBox is in progress if any of its cells are non-empty and if
-    // it's not completely filled.
-    this.inProgress = function() {
-        var found = goog.array.reduce(this.cells, function(r, v) {
-            var c = (goog.isNull(v.die)) ? 0 : 1;
-            return r + c;
-        }, 0);
-        return (found != 0 && found != 6);
-    }
-    
-    this.String = function() {
-        return this.region.String() + ' search box ' + this.index;
-    };
-}
+SearchBox.prototype.toString = function() {
+    return this.region.toString() + ' search box ' + this.index;
+};
 
 /**
  * Cell is an individual cell in a search box.
@@ -92,17 +105,18 @@ var Cell = function(searchBox, row, column) {
     this.column = column;
     this.die = null;
     
-    /**
-     * Indicates if the cell is a valid target for assigning a die.
-     * @return {boolean}
-     */
-    this.available = function() {
-        return this.searchBox.available() && this.die == null;
-    }
-    
-    this.String = function() {
-        return this.searchBox.String() + " cell " + this.row + " " + this.column;
-    };
-}
+};
 
-});
+/**
+ * Indicates if the cell is a valid target for assigning a die.
+ * @return {boolean}
+ */
+Cell.prototype.available = function() {
+    return this.searchBox.available() && this.die == null;
+};
+
+Cell.prototype.toString = function() {
+    return this.searchBox.toString() + " cell " + this.row + " " + this.column;
+};
+
+}); // goog.scope()

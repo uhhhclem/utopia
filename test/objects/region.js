@@ -38,7 +38,7 @@ describe('Region', function(){
         expect(sb3.available()).toBe(true);
 
         sb2.rows[0][1].die = 'die';
-        expect(obj.inProgress().String()).toBe(sb2.String());
+        expect(obj.inProgress().toString()).toBe(sb2.toString());
         expect(sb2.available()).toBe(true);
         expect(sb3.available()).toBe(false);
 
@@ -48,7 +48,6 @@ describe('Region', function(){
         expect(obj.inProgress()).toBeNull();
         expect(sb2.available()).toBe(true);
         expect(sb3.available()).toBe(true);
-        
     });
     
 });

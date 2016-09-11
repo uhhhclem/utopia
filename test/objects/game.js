@@ -41,4 +41,12 @@ describe('Game', function() {
        game.deselectDie(die2);
        expect(game.selectedDie).toBe(null);
    });
+   
+   it('should indicate which region is in progress', function() {
+     expect(game.inProgress()).toBe(null);
+     game.regions[5].searchBoxes[2].rows[1][2].die = "a die";
+     var r = game.inProgress();
+     expect(r).not.toBe(null);
+     expect(r.name).toBe('The Fiery Maw');
+   });
 });

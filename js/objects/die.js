@@ -13,10 +13,12 @@ var Die = function(game, id) {
   this.selected = false;
   this.assignedTo = null;
   
-Die.prototype.roll = function() {
-  this.value = Math.floor(Math.random() * (6)) + 1;
 };
 
+utopia.objects.die.Die = Die;
+
+Die.prototype.roll = function() {
+  this.value = Math.floor(Math.random() * (6)) + 1;
 };
 
 Die.prototype.canSelect = function() {
@@ -35,6 +37,4 @@ Die.prototype.toString = function() {
   return this.id;
 }
 
-utopia.objects.die.Die = Die;
-
-});
+}); // goog.scope()

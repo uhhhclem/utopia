@@ -5,16 +5,27 @@ goog.provide('utopia.directives.utsearchcell');
 
 goog.scope(function() {
 
-var ctrl = ['$scope', '$attrs', 'game', function($scope, $attrs, game) {
+var ctrl = function($scope, $attrs, game) {
     var region = game.regions[this.region];
-    var box = region.searchBoxes[this.box];
-    this.cell = box.rows[this.row][this.column];
-}];
+    this.searchBox = region.searchBoxes[this.box];
+    this.cell = this.searchBox.rows[this.row][this.column];
+    this.game = game;
+};
+
+ctrl.prototype.click = function() {
+  if (goog.isNull(this.game.selectedDie)) {
+    return;
+  }
+  if (!this.searchBox.available() && !goog.isNull(this.cell.value)) {
+    return;
+  }
+  this.game.assignSelectedDie(this.cell);
+};
 
 utopia.directives.utsearchcell.directive = function() {
     return {
         bindToController: true,
-        controller: ctrl,
+        controller: ['$scope', '$attrs', 'game', ctrl],
         controllerAs: 'c',
         restrict: 'E',
         scope: {
@@ -23,7 +34,7 @@ utopia.directives.utsearchcell.directive = function() {
             row: '@row',
             region: '@region',
         },
-        template: '<div>{{c.cell.value}}</div>'
+        template: '<div ng-click="c.click()">{{c.cell.value}}</div>'
     };
 }
 

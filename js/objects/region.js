@@ -82,7 +82,7 @@ SearchBox.prototype.available = function() {
  */
 SearchBox.prototype.inProgress = function() {
     var found = goog.array.reduce(this.cells, function(r, v) {
-        var c = (goog.isNull(v.die)) ? 0 : 1;
+        var c = (goog.isNull(v.value)) ? 0 : 1;
         return r + c;
     }, 0);
     return (found != 0 && found != 6);
@@ -103,7 +103,7 @@ var Cell = function(searchBox, row, column) {
     this.searchBox = searchBox;
     this.row = row;
     this.column = column;
-    this.die = null;
+    this.value = null;
     
 };
 

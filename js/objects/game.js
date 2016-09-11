@@ -27,7 +27,7 @@ var Game = function() {
     angular.forEach(utopia.constants.regions, function(v, k) {
         regions[v.number - 1] = new utopia.objects.region.Region(k);
     });
-    this.regions =regions;
+    this.regions = regions;
 };
 
 utopia.objects.game.Game = Game;
@@ -79,6 +79,20 @@ Game.prototype.deselectDie = function(die) {
     die.selected = false;
     this.selectedDie = null;
 };
+
+/**
+ * Assign the selected die to a cell, setting the cell's value and marking
+ * the die as assigned.
+ * @param {utopia.objects.Cell}
+ */
+Game.prototype.assignSelectedDie = function(cell) {
+  var die = this.selectedDie;
+  if (goog.isNull(die) || !goog.isNull(cell.value)) {
+      return;
+  }
+  cell.value = die.value;
+  die.assigned = true;
+}
 
 /**
  * Returns the region that is currently in progress, i.e. the region

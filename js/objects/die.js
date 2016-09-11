@@ -11,7 +11,7 @@ var Die = function(game, id) {
   this.value = null;
   
   this.selected = false;
-  this.assignedTo = null;
+  this.assigned = false;
   
 };
 

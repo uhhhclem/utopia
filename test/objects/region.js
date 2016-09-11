@@ -24,7 +24,7 @@ describe('Region', function(){
         var column = 1;
         var sb = obj.searchBoxes[index];
         var cell = sb.rows[row][column];
-        expect(cell.searchBox.region).toBe(obj)
+        expect(cell.searchBox.region).toBe(obj);
         expect(cell.searchBox.index).toBe(index);
         expect(cell.row).toBe(row);
         expect(cell.column).toBe(column);
@@ -37,13 +37,13 @@ describe('Region', function(){
         expect(sb2.available()).toBe(true);
         expect(sb3.available()).toBe(true);
 
-        sb2.rows[0][1].die = 'die';
+        sb2.rows[0][1].value = 'value';
         expect(obj.inProgress().toString()).toBe(sb2.toString());
         expect(sb2.available()).toBe(true);
         expect(sb3.available()).toBe(false);
 
         for (var i = 0; i < sb2.cells.length; i++) {
-            sb2.cells[i].die = 'die';
+            sb2.cells[i].value = 'value';
         }        
         expect(obj.inProgress()).toBeNull();
         expect(sb2.available()).toBe(true);
